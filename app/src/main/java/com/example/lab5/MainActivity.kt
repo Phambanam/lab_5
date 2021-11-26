@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     private var backgroundThread = Thread {
         try {
             while (!Thread.currentThread().isInterrupted) {
-                Log.d("MainActivity", "${Thread.currentThread()} is iterating")
+                Log.d("TEST", "${Thread.currentThread()} is iterating")
                 binding.textSecondsElapsed.post {
                     binding.textSecondsElapsed.text = getString(R.string.sec_elapsed, secondsElapsed++)
                 }
