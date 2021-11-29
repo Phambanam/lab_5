@@ -25,10 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onResume() {
-        Log.d("Test","resuming")
-        super.onResume()
-    }
     override fun onStart() {
         secondsElapsed = sharedPreferences.getInt("SECONDS", 0)
         start = System.currentTimeMillis()
