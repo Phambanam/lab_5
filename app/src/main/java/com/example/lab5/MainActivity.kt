@@ -42,8 +42,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        startCountTime()
+        start = System.currentTimeMillis()
         secondsElapsed = sharedPreferences.getInt("SECONDS", 0)
+        startCountTime()
         Log.d("TEST","thread start\nSECONDS = $secondsElapsed ")
     }
 
