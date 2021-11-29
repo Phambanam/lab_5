@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.lab5.databinding.ActivityMainBinding
-import kotlin.random.Random
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,8 +33,9 @@ class MainActivity : AppCompatActivity() {
                 while (!Thread.currentThread().isInterrupted) {
                     Log.d("TEST", "${Thread.currentThread()} is iterating")
                     binding.textSecondsElapsed.post {
-                        // val current = secondsElapsed + ((System.currentTimeMillis() - start)/1000).toInt()
-                        binding.textSecondsElapsed.text = getString(R.string.sec_elapsed, secondsElapsed++)
+                        val current =
+                            secondsElapsed + ((System.currentTimeMillis() - start)/1000).toInt()
+                        binding.textSecondsElapsed.text = getString(R.string.sec_elapsed, current)
                     }
                     Thread.sleep(1000)
                 }
