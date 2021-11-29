@@ -15,14 +15,17 @@ class MainActivity : AppCompatActivity() {
     private  var secondsElapsed: Int = 0
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var executorService: ExecutorService
-
+    private var start = 0L
+    private var end = 0L
     private fun startCountTime(){
         executorService = Executors.newFixedThreadPool(1)
         executorService.execute{
             while (!executorService.isShutdown) {
                 Log.d("TEST", "${Thread.currentThread()} is iterating")
                 binding.textSecondsElapsed.post {
-                    binding.textSecondsElapsed.text = getString(R.string.sec_elapsed, secondsElapsed++)
+                    val current =
+                        secondsElapsed + ((System.currentTimeMillis() - start)/1000).toInt()
+                    binding.textSecondsElapsed.text = getString(R.string.sec_elapsed, current)
                 }
                 Thread.sleep(1000)
             }
@@ -46,7 +49,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-       executorService.shutdown()
+        end = System.currentTimeMillis()
+        secondsElapsed += ((end - start)/1000).toInt()
+        executorService.shutdown()
         sharedPreferences.edit().putInt("SECONDS", secondsElapsed).apply()
         Log.d("TEST","Thread interrupted\n" +
                 "SECONDS = $secondsElapsed ")
