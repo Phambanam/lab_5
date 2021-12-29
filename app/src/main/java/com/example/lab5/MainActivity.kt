@@ -23,9 +23,8 @@ class MainActivity : AppCompatActivity() {
             Log.d("TEST", "Coroutine is launching")
             while(true){
                 Log.d("TEST", "coroutine is working ")
-                binding.textSecondsElapsed.post {
-                    binding.textSecondsElapsed.text = getString(R.string.sec_elapsed, secondsElapsed++)
-                }
+                binding.textSecondsElapsed.text =
+                    getString(R.string.sec_elapsed, secondsElapsed++)
                 delay(1000)
             }
         }
